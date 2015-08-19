@@ -1,0 +1,12 @@
+#!/bin/bash
+DIR="$(dirname "$(which "$0")")"
+BASE="$(dirname "$(dirname "$(which "$0")")")"
+docker run --rm -it \
+  -v $DIR/bash.bash_history:/home/dev/.bash_history \
+  -v $DIR/vim.viminfo:/home/dev/.viminfo \
+  -v $DIR/irb.irb-history:/home/dev/.irb-history \
+  -v $BASE:/home/dev/docker \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -h rocker \
+  rocker/dev:v1 \
+  bash
